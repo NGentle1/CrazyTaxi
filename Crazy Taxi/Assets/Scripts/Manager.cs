@@ -43,17 +43,26 @@ public class Manager : MonoBehaviour {
         {
             doubleCarInt = Random.Range(0, 2);
             laneNum = Random.Range(-1, 2);
-            trafficUpdate = Time.time;
-            Instantiate(Resources.Load("Traffic"), new Vector3(laneNum, .5f, 4f), transform.rotation);
-            if (doubleCarInt == 1 && score > 10)
+            do
             {
-                do
+                laneNum2 = Random.Range(-1, 2);
+            } while (laneNum2 == laneNum);
+            trafficUpdate = Time.time;
+            if(score > 150)
+            {
+                Instantiate(Resources.Load("Traffic"), new Vector3(laneNum, .5f, 4f), transform.rotation);
+                if (doubleCarInt == 1 && score > 10)
                 {
-                    laneNum2 = Random.Range(-1, 2);
-                } while (laneNum2 == laneNum);
-                Instantiate(Resources.Load("Traffic"), new Vector3(laneNum2, .5f, 4f), transform.rotation);
+                    Instantiate(Resources.Load("Traffic"), new Vector3(laneNum2, .5f, 4f), transform.rotation);
 
+                }
             }
+            else
+            {
+                Instantiate(Resources.Load("Traffic"), new Vector3(laneNum, .5f, 4f), transform.rotation);
+                Instantiate(Resources.Load("Traffic"), new Vector3(laneNum2, .5f, 4f), transform.rotation);
+            }
+           
         }
         if (Time.time - sidewalkUpdate >= 2.3f && gameState == true) {
             sidewalkUpdate = Time.time;
